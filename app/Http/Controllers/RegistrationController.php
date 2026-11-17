@@ -162,6 +162,36 @@ class RegistrationController extends Controller
         ]);
     }
 
+    public function cancel(Request $request, Registration $registration)
+    {
+        $this->authorizeOwner($request, $registration);
+
+        if ($registration->status !== 'pending') {
+            return to_route('registrations.show', $registration)
+                ->with('message', 'Hanya pendaftaran yang belum dibayar yang bisa dibatalkan.');
+        }
+
+        try {
+            $this->configMidtrans();
+            $result = Transaction::status($registration->order_id);
+
+            if (in_array($result->transaction_status, ['settlement', 'capture'])) {
+                $registration->update(['status' => 'paid']);
+
+                return to_route('registrations.show', $registration)
+                    ->with('message', 'Pembayaran sudah masuk, jadi pendaftaran tidak bisa dibatalkan.');
+            }
+
+            Transaction::cancel($registration->order_id);
+        } catch (\Exception $e) {
+            report($e);
+        }
+
+        $registration->delete();
+
+        return to_route('registrations.index')->with('message', 'Pendaftaran dibatalkan.');
+    }
+
     private function mapStatus(string $midtransStatus): ?string
     {
         return match ($midtransStatus) {

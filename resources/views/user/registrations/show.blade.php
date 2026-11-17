@@ -66,7 +66,14 @@
                             Cek Status
                         </a>
                     </div>
-
+<form method="POST" action="{{ route('registrations.cancel', $registration) }}"
+      onsubmit="return confirm('Batalkan pendaftaran ini?')" class="mt-3">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="w-full bg-red-100 text-red-700 py-2 rounded-lg font-bold text-sm hover:bg-red-200 transition cursor-pointer">
+        Batalkan Pendaftaran
+    </button>
+</form>
                 @else
                     <p class="text-sm text-gray-500 mb-3">
                         Pembayaran ini {{ $registration->status === 'expired' ? 'sudah kedaluwarsa' : 'tidak berhasil' }}.

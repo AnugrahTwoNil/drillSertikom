@@ -33,6 +33,7 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('registrations/{registration}/pay', [RegistrationController::class, 'pay'])->name('registrations.pay');
     Route::get('registrations/{registration}/check', [RegistrationController::class, 'check'])->name('registrations.check');
     Route::get('registrations/{registration}/ticket', [RegistrationController::class, 'ticket'])->name('registrations.ticket');
+    Route::delete('registrations/{registration}', [RegistrationController::class, 'cancel'])->name('registrations.cancel');
 
     // Profile (Breeze). Delete these three lines if you removed the profile pages.
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
