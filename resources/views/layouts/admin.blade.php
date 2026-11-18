@@ -35,7 +35,7 @@
         :class="sidebar ? 'translate-x-0' : '-translate-x-full'"
     >
         <div class="px-6 py-6 flex items-center justify-between">
-            <h1 class="text-lg font-semibold text-[#FEF9C3]">Workshop Sekolah</h1>
+            <h1 class="text-lg font-semibold text-[#FEF9C3]">WorkshopTIX</h1>
             <button type="button" class="md:hidden text-[#C9C6BB] hover:text-[#FEF9C3]" @click="sidebar = false">
                 <i class="fa-solid fa-xmark"></i>
             </button>

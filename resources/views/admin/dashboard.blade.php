@@ -8,7 +8,7 @@
         <h1 class="text-2xl font-semibold text-[#4F545C]">
             Halo, {{ auth()->user()->name }}
         </h1>
-        <p class="text-[#7A7F87] mt-1">Ringkasan data workshop sekolah.</p>
+        <p class="text-[#7A7F87] mt-1">Ringkasan data workshopTIX.</p>
     </div>
 
     <!-- Stat cards -->
